@@ -384,7 +384,7 @@
 
     <section class="page-hero">
         <h1 data-i18n="projectsHero.title">Projetos realizados pela <span>Ponto.PT</span></h1>
-        <p data-i18n="projectsHero.subtitle">Uma seleção dos nossos trabalhos, divididos por tipo — com foco em qualidade, performance e resultados.</p>
+        <p data-i18n="projectsHero.subtitle">Uma seleção dos nossos trabalhos, divididos por tipo - com foco em qualidade, performance e resultados.</p>
     </section>
 
     <section class="section" aria-label="Projetos - Websites e Branding">
@@ -426,16 +426,21 @@
                         'nav.about': 'Quem Somos',
                         'nav.contact': 'Contacto',
                         'projectsHero.title': 'Projetos realizados pela <span>Ponto.PT</span>',
-                        'projectsHero.subtitle': 'Uma seleção dos nossos trabalhos, divididos por tipo — com foco em qualidade, performance e resultados.',
+                        'projectsHero.subtitle': 'Uma seleção dos nossos trabalhos, divididos por tipo - com foco em qualidade, performance e resultados.',
                         'section1.title': 'Website & Marketing',
                         'section2.title': 'Blog & Marketing',
                         'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.',
                         'project.view': 'Ver detalhes',
                         'project.more': 'Mais info',
-                        'project.case': 'Case Study'
+                        'project.case': 'Case Study',
+                        'projects.modal.title': 'Preview video',
+                        'projects.modal.close': 'Close',
+                        'projects.modal.hint': 'No video file defined. Showing preview (poster).',
+                        'projects.modal.openSite': 'Open site'
                     },
                     placeholders: {}
                 },
+
                 'en': {
                     lang: 'en',
                     flagSrc: 'band2.jpg',
@@ -527,7 +532,7 @@
                 tone: 'alt',
                 siteUrl: 'https://eu-alinho.vercel.app/',
                 videoPoster: 'img7.png',
-                videoSrc: ''
+                videoSrc: '#'
             }
         ];
 
@@ -601,20 +606,21 @@
 
             modal.innerHTML = `
                 <div style="width: min(980px, 100%); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 30px 90px rgba(0,0,0,0.35); border:1px solid rgba(0,0,0,0.08);">
-                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:linear-gradient(135deg, rgba(0,102,204,0.08), rgba(255,204,0,0.06));">
-                        <div style="font-weight:800;">Preview vídeo</div>
-                        <button type="button" class="btn" style="padding:8px 12px;" data-close-preview>Fechar</button>
+                        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:linear-gradient(135deg, rgba(0,102,204,0.08), rgba(255,204,0,0.06));">
+                        <div style="font-weight:800;" data-i18n="projects.modal.title">Preview video</div>
+                        <button type="button" class="btn" style="padding:8px 12px;" data-close-preview data-i18n="projects.modal.close">Close</button>
                     </div>
                     <div style="padding:16px;">
                         <div style="border-radius:14px; overflow:hidden; background:#f3f4f6;">
                             <img id="ppPreviewImg" src="" alt="Preview" style="width:100%; height:420px; object-fit:cover; display:block;" />
                         </div>
-                        <div id="ppVideoHint" style="margin-top:12px; color:#666; font-size:0.95rem;">Sem ficheiro de vídeo definido. Mostrando preview (poster).</div>
+                        <div id="ppVideoHint" data-i18n="projects.modal.hint" style="margin-top:12px; color:#666; font-size:0.95rem;">No video file defined. Showing preview (poster).</div>
                         <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
-                            <a id="ppSiteLink" class="btn primary" href="#" target="_blank" rel="noopener">Abrir site</a>
+                            <a id="ppSiteLink" class="btn primary" href="#" target="_blank" rel="noopener" data-i18n="projects.modal.openSite">Open site</a>
                         </div>
                     </div>
                 </div>
+
             `;
 
             document.body.appendChild(modal);
@@ -630,8 +636,12 @@
                     // no-op
                 }
                 if (hint) {
-                    hint.textContent = 'Sem ficheiro de vídeo definido. Mostrando preview (poster).';
+                    // Se houver tradução por i18n, o conteúdo já foi aplicado.
+                    // Caso contrário, usa um texto base.
+                    const fallback = 'Sem ficheiro de vídeo definido. Mostrando preview (poster).';
+                    hint.textContent = hint.textContent?.trim() ? hint.textContent : fallback;
                 }
+
 
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';

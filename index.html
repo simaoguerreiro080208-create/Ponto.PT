@@ -27,6 +27,15 @@
             line-height: 1.6;
         }
 
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        section[id] {
+            scroll-margin-top: 90px;
+        }
+
         /* --- Menu de NavegaÃ§Ã£o Fixo --- */
         header {
             position: fixed;
@@ -367,9 +376,14 @@
         .pp-actions { display:flex; gap: 12px; flex-wrap:wrap; }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero { padding: 150px 16px 70px 16px; min-height: 70vh; }
+            .hero h1 { font-size: 2.1rem; margin-bottom: 14px; }
+            .hero p { font-size: 1.05rem; margin-bottom: 24px; }
+
             .nav-links { display: none; }
             .logo-img { height: 56px; }
+
+            .pp-media { height: 190px; }
         }
         @media (prefers-reduced-motion: reduce) {
             .pp-card { opacity: 1 !important; transform: none !important; transition: none !important; }
@@ -419,7 +433,7 @@
                 <h3 data-i18n="services.card1.title">Website Building</h3>
                 <p data-i18n="services.card1.desc">Criamos sites modernos, rápidos e totalmente adaptados a telemóveis e tablets, garantindo que o teu negócio tem a montra digital que merece.</p>
                 <div class="testimonial">
-                    <img src="images(2).png" width="450px" height="300px">
+                    <img src="images(2).png" alt="Imagem do serviço" loading="lazy">
                 </div>
             </div>
 
@@ -427,7 +441,7 @@
                 <h3 data-i18n="services.card2.title">Social Media Management</h3>
                 <p data-i18n="services.card2.desc">Gerimos a presença da tua marca nas redes sociais com estratégias focadas em atrair novos clientes e criar uma comunidade ativa.</p>
                 <div class="testimonial">
-                    <img src="images (1).jpg" width="450px" height="300px">
+                    <img src="images (1).jpg" alt="Imagem do serviço" loading="lazy">
                 </div>
             </div>
 

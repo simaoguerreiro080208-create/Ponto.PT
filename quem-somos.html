@@ -207,11 +207,16 @@
             border-top: 5px solid var(--azul-acento);
             background: #fff;
         }
-        .about-photo img {
+.about-photo img {
             width: 100%;
             height: 420px;
             object-fit: cover;
             display: block;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
         }
 
         .about-copy {
@@ -279,6 +284,23 @@
             .bio-photo img {
                 height: 320px;
             }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero { padding: 150px 16px 50px 16px; }
+            .section { padding: 50px 16px; }
+            .about-photo img,
+            .bio-photo img {
+                height: 280px;
+            }
+            .about-copy p,
+            .bio-copy p {
+                font-size: 1rem;
+            }
+        }
+
+        section[id] {
+            scroll-margin-top: 90px;
         }
 
         /* --- Rodapé --- */
@@ -368,14 +390,15 @@
                         'nav.contact': 'Contacto',
                         'aboutHero.title': 'Quem <span>Somos</span>',
                         'aboutHero.subtitle': 'PontoPT cria experiências digitais que fazem o teu negócio crescer - com foco em qualidade, performance e resultados.',
-                        'aboutCompany.title': 'A pessoa por trás do projeto',
-                        'aboutCompany.p1': 'Olá, o meu nome é Simão, tenho 18 anos e sou da Sertã. tenho paixão por programação e multimédia em geral.',
-                        'aboutCompany.p2': 'Sou um programador experiente e tenho muitas horas de experiencia em programação. Eu tenho cuidado em oferecer ao cliente um serviço confiável.',
-                        'aboutCompany.p3': 'Confia em Ponto.pt, O teu pareceiro para o sucesso online.',
-                        'aboutBio.title': 'A nossa empresa',
-                        'aboutBio.p1': 'O projeto PontoPT tem como finalidade a criação de uma empresa especializada em Desenvolvimento Web e Marketing Digital.',
-                        'aboutBio.p2': 'O Ponto.PT é direcionado principalmente para pequenas e médias empresas (PME), empreendedores e profissionais independentes. ',
-                        'aboutBio.p3': 'O projeto surge da necessidade crescente de modernização digital de muitas empresas nacionais, que enfrentam dificuldades em adaptar-se às exigências do mercado atual.',
+'aboutCompany.title': 'The person behind the project',
+                        'aboutCompany.p1': 'Hello, my name is Simão. I am 18 years old and I am from Sertã. I have a passion for programming and multimedia in general.',
+                        'aboutCompany.p2': 'I am an experienced programmer with extensive programming experience. I care about delivering a reliable service to the client.',
+                        'aboutCompany.p3': 'Trust Ponto.pt — your partner for online success.',
+                        'aboutBio.title': 'Our company',
+                        'aboutBio.p1': 'The PontoPT project aims to create a company specialized in Web Development and Digital Marketing.',
+                        'aboutBio.p2': 'Ponto.PT is primarily aimed at small and medium-sized enterprises (SMEs), entrepreneurs, and independent professionals.',
+                        'aboutBio.p3': 'The project comes from the growing need for digital modernization among many domestic companies, which struggle to adapt to the demands of the current market.',
+
                         'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.'
                     },
                     placeholders: {}

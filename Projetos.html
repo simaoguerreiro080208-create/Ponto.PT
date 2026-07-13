@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projetos - PontoPT</title>
+    <style>
+        /* --- Reset & Variáveis --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --branco: #ffffff;
+            --cinza-claro: #f8f9fa;
+            --cinza-texto: #333333;
+            --ponto-vermelho:#333333;
+            --azul-acento: #0066cc;
+            --amarelo-acento: #ffcc00;
+        }
+
+        body {
+            color: var(--cinza-texto);
+            background-color: var(--branco);
+            line-height: 1.6;
+        }
+
+        /* --- Menu de Navegação Fixo --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: padding 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            transition: padding 0.25s ease;
+        }
+
+        .logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            display: block;
+            height: 78px;
+            width: auto;
+            object-fit: contain;
+            transition: height 0.25s ease, filter 0.25s ease;
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.08));
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+        }
+        header.scrolled .nav-container { padding: 10px 20px; }
+        header.scrolled .logo-img { height: 48px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cinza-texto);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--azul-acento); }
+
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 10px;
+            transition: transform 0.15s, background 0.15s;
+        }
+        .lang-toggle:hover {
+            transform: translateY(-1px);
+            background: rgba(0,0,0,0.03);
+        }
+        .lang-flag {
+            width: 34px;
+            height: 22px;
+            display: block;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .logo-img { height: 56px; }
+            .lang-flag { width: 32px; height: 20px; }
+        }
+
+        /* --- Hero --- */
+        .page-hero {
+            padding: 190px 20px 70px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .page-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 45%, #d1d5db 100%);
+            background-size: 200% 200%;
+            animation: heroBgMove 10s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            inset: -40px;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.65), rgba(255,255,255,0) 55%),
+                radial-gradient(circle at 80% 30%, rgba(0,0,0,0.06), rgba(0,0,0,0) 60%),
+                radial-gradient(circle at 40% 85%, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%);
+            animation: heroGlow 7s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-hero > * { position: relative; z-index: 1; }
+
+        @keyframes heroBgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes heroGlow {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.95; }
+            50% { transform: translate3d(2%, -2%, 0) scale(1.03); opacity: 1; }
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            max-width: 1000px;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        .page-hero h1 span { color: var(--ponto-vermelho); }
+        .page-hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 780px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.2rem; }
+        }
+
+        /* --- Secções --- */
+        .section {
+            padding: 70px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .section-title .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--azul-acento);
+            box-shadow: 0 0 0 10px rgba(0,102,204,0.12);
+            animation: pulse 2.2s ease-in-out infinite;
+        }
+        .section-title.alt .dot {
+            background: var(--amarelo-acento);
+            box-shadow: 0 0 0 10px rgba(255,204,0,0.18);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 22px;
+        }
+
+        .project-card {
+            background: var(--branco);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            border: 1px solid rgba(0,0,0,0.04);
+            transform: translateY(10px);
+            opacity: 0;
+            transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card.is-visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .project-media {
+            height: 200px;
+            position: relative;
+            background: #f3f4f6;
+        }
+
+        .project-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(1.1);
+            transform: scale(1.02);
+            transition: transform 0.45s ease;
+        }
+
+        .project-card:hover .project-media img { transform: scale(1.08); }
+
+        .project-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #fff;
+            background: linear-gradient(135deg, rgba(0,102,204,0.95), rgba(0,102,204,0.65));
+            box-shadow: 0 10px 24px rgba(0,102,204,0.22);
+            backdrop-filter: blur(6px);
+        }
+
+        .project-card.alt .project-badge {
+            background: linear-gradient(135deg, rgba(255,204,0,0.95), rgba(255,204,0,0.65));
+            box-shadow: 0 10px 24px rgba(255,204,0,0.25);
+            color: #2b2b2b;
+        }
+
+        .project-body {
+            padding: 18px 18px 22px 18px;
+        }
+
+        .project-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .project-body p {
+            color: #555;
+            margin-bottom: 14px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: #fafafa;
+            font-size: 0.85rem;
+            color: #444;
+        }
+
+        .project-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: 1px solid rgba(0,0,0,0.08);
+            background: #fff;
+            color: var(--cinza-texto);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 26px rgba(0,0,0,0.08);
+        }
+
+        .btn.primary {
+            border-color: rgba(0,102,204,0.25);
+            background: linear-gradient(135deg, rgba(0,102,204,0.12), rgba(0,102,204,0.05));
+        }
+
+        .btn.secondary {
+            border-color: rgba(255,204,0,0.25);
+            background: linear-gradient(135deg, rgba(255,204,0,0.2), rgba(255,204,0,0.06));
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project-card, .project-media img, .page-hero::before, .page-hero::after, .section-title .dot {
+                animation: none !important;
+                transition: none !important;
+            }
+            .project-card { opacity: 1; transform: none; }
+        }
+
+        /* --- Rodapé --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a class="logo-link" href="index.html" aria-label="PontoPT">
+                <img class="logo-img" src="logos.png" alt="PontoPT" />
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html#servicos" data-i18n="nav.services">Serviços</a>
+                <a href="Projetos.html" data-i18n="nav.projects">Projetos</a>
+                <a href="quem-somos.html" data-i18n="nav.about">Quem Somos</a>
+                <a href="index.html#contacto" data-i18n="nav.contact">Contacto</a>
+            </nav>
+
+            <div class="nav-right">
+                <button class="lang-toggle" type="button" id="langToggle" aria-label="Trocar idioma">
+                    <img class="lang-flag" id="langFlag" alt="Bandeira" src="band1.jpg" />
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-i18n="projectsHero.title">Projetos realizados pela <span>Ponto.PT</span></h1>
+        <p data-i18n="projectsHero.subtitle">Uma seleção dos nossos trabalhos, divididos por tipo — com foco em qualidade, performance e resultados.</p>
+    </section>
+
+    <section class="section" aria-label="Projetos - Websites e Branding">
+        <div class="container">
+            <h2 class="section-title" data-i18n="section1.title">
+                <span class="dot" aria-hidden="true"></span>
+                <span>Website & Marketing</span>
+            </h2>
+
+            <div class="cards-grid" id="gridWebsites"></div>
+        </div>
+    </section>
+
+    <section class="section" aria-label="Projetos - Marketing e Redes Sociais">
+        <div class="container">
+            <h2 class="section-title alt" data-i18n="section2.title">
+                <span class="dot" aria-hidden="true"></span>
+                <span>Blog & Marketing</span>
+            </h2>
+
+            <div class="cards-grid" id="gridMarketing"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer.copy">&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        (function () {
+            const translations = {
+                'pt-pt': {
+                    lang: 'pt-pt',
+                    flagSrc: 'band1.jpg',
+                    flagAlt: 'Bandeira de Portugal',
+                    i18n: {
+                        'nav.services': 'Serviços',
+                        'nav.projects': 'Projetos',
+                        'nav.about': 'Quem Somos',
+                        'nav.contact': 'Contacto',
+                        'projectsHero.title': 'Projetos realizados pela <span>Ponto.PT</span>',
+                        'projectsHero.subtitle': 'Uma seleção dos nossos trabalhos, divididos por tipo — com foco em qualidade, performance e resultados.',
+                        'section1.title': 'Website & Marketing',
+                        'section2.title': 'Blog & Marketing',
+                        'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.',
+                        'project.view': 'Ver detalhes',
+                        'project.more': 'Mais info',
+                        'project.case': 'Case Study'
+                    },
+                    placeholders: {}
+                },
+                'en': {
+                    lang: 'en',
+                    flagSrc: 'band2.jpg',
+                    flagAlt: 'Flag of the United Kingdom',
+                    i18n: {
+                        'nav.services': 'Services',
+                        'nav.projects': 'Projects',
+                        'nav.about': 'About Us',
+                        'nav.contact': 'Contact',
+                        'projectsHero.title': 'Projects made by <span>Ponto.PT</span>',
+                        'projectsHero.subtitle': 'A curated selection of our work, split by category — focused on quality, performance and results.',
+                        'section1.title': 'Website & Marketing',
+                        'section2.title': 'Blog & Marketing',
+                        'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. All rights reserved.',
+                        'project.view': 'View details',
+                        'project.more': 'More info',
+                        'project.case': 'Case Study'
+                    },
+                    placeholders: {}
+                }
+            };
+
+            const html = document.documentElement;
+            const flagImg = document.getElementById('langFlag');
+            const toggleBtn = document.getElementById('langToggle');
+
+            function applyLanguage(lang) {
+                const t = translations[lang] || translations['pt-pt'];
+                html.lang = t.lang;
+
+                if (flagImg) {
+                    flagImg.src = t.flagSrc;
+                    flagImg.alt = t.flagAlt;
+                }
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const val = t.i18n[key];
+                    if (val === undefined) return;
+                    if (val.includes('<')) el.innerHTML = val;
+                    else el.textContent = val;
+                });
+            }
+
+            function toggleLanguage() {
+                const current = (document.documentElement.lang || 'pt-pt').toLowerCase();
+                const next = current === 'pt-pt' ? 'en' : 'pt-pt';
+                applyLanguage(next);
+            }
+
+            if (toggleBtn) toggleBtn.addEventListener('click', toggleLanguage);
+            applyLanguage('pt-pt');
+        })();
+
+        // Navbar: efeito compacto ao fazer scroll
+        (function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+
+            function onScroll() {
+                if (window.scrollY > 20) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+        // Cards: facilmente editável (array)
+        // Ajustado: 1 caixa por empresa (Loki Park e EuAlinho)
+        const companies = [
+            {
+                title: 'Loki Park',
+                desc: 'Projeto com foco em presença digital apelativa, rápido e otimizado para conversão.',
+                previewImage: 'img-qs1.jpg',
+                badge: 'Projeto',
+                meta: ['Web', 'Performance', 'UI/UX'],
+                tone: 'primary',
+                siteUrl: 'https://loki-park.vercel.app/',
+                videoPoster: 'img5.png',
+                videoSrc: ''
+            },
+            {
+                title: 'EuAlinho',
+                desc: 'Experiência digital com identidade consistente e componente visual moderno.',
+                previewImage: 'img2.jpg',
+                badge: 'Projeto',
+                meta: ['Branding', 'Mobile-first', 'SEO'],
+                tone: 'alt',
+                siteUrl: 'https://eu-alinho.vercel.app/',
+                videoPoster: 'img7.png',
+                videoSrc: ''
+            }
+        ];
+
+        function createCard(item) {
+            const card = document.createElement('article');
+            card.className = 'project-card' + (item.tone === 'alt' ? ' alt' : '');
+
+            card.innerHTML = `
+                <div class="project-media">
+                    <img src="${item.previewImage}" alt="${item.title}" loading="lazy" />
+                    <div class="project-badge">${item.badge}</div>
+                </div>
+
+                <div class="project-body">
+                    <h3>${item.title}</h3>
+                    <p>${item.desc}</p>
+
+                    <div class="project-meta">
+                        ${item.meta.map(x => `<span class="meta-pill">${x}</span>`).join('')}
+                    </div>
+
+                    <div class="project-actions" style="align-items:center;">
+                        <button class="btn primary" type="button" data-video-poster="${item.videoPoster}" data-video-src="${item.videoSrc}" data-video-title="${item.title}" data-site-url="${item.siteUrl}">
+                            Ver preview de vídeo
+                        </button>
+                        <a class="btn" href="${item.siteUrl}" target="_blank" rel="noopener">Site</a>
+                    </div>
+
+                    <div class="video-inline" style="margin-top:14px;">
+                        <div style="position:relative;border-radius:12px;overflow:hidden;background:#f3f4f6;">
+                            <img src="${item.videoPoster}" alt="Preview de vídeo - ${item.title}" loading="lazy" style="width:100%;height:160px;object-fit:cover;display:block;filter:saturate(1.05);" />
+                            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+                                <div style="width:56px;height:56px;border-radius:999px;background:rgba(0,102,204,0.85);display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(0,102,204,0.25);">
+                                    <span style="display:block;width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:14px solid #fff;margin-left:2px;"></span>
+                                </div>
+                            </div>
+                            <button class="btn" type="button" data-open-preview="1" data-video-poster="${item.videoPoster}" data-video-src="${item.videoSrc}" data-video-title="${item.title}" data-site-url="${item.siteUrl}" style="position:absolute;inset:0;opacity:0;cursor:pointer;">
+                                Abrir preview
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        const gridWebsites = document.getElementById('gridWebsites');
+        const gridMarketing = document.getElementById('gridMarketing');
+
+        // Distribui: 1 empresa em cada secção para manter “1 caixa por empresa”
+        const [first, second] = companies;
+        if (first) gridWebsites.appendChild(createCard(first));
+        if (second) gridMarketing.appendChild(createCard(second));
+
+
+        // Modal preview de vídeo (mesmo sem mp4 real)
+        (function () {
+            const cards = document.querySelectorAll('.project-card');
+            const modal = document.createElement('div');
+            modal.setAttribute('role', 'dialog');
+            modal.setAttribute('aria-modal', 'true');
+            modal.style.position = 'fixed';
+            modal.style.inset = '0';
+            modal.style.background = 'rgba(0,0,0,0.62)';
+            modal.style.display = 'none';
+            modal.style.alignItems = 'center';
+            modal.style.justifyContent = 'center';
+            modal.style.padding = '20px';
+            modal.style.zIndex = '9999';
+
+            modal.innerHTML = `
+                <div style="width: min(980px, 100%); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 30px 90px rgba(0,0,0,0.35); border:1px solid rgba(0,0,0,0.08);">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:linear-gradient(135deg, rgba(0,102,204,0.08), rgba(255,204,0,0.06));">
+                        <div style="font-weight:800;">Preview vídeo</div>
+                        <button type="button" class="btn" style="padding:8px 12px;" data-close-preview>Fechar</button>
+                    </div>
+                    <div style="padding:16px;">
+                        <div style="border-radius:14px; overflow:hidden; background:#f3f4f6;">
+                            <img id="ppPreviewImg" src="" alt="Preview" style="width:100%; height:420px; object-fit:cover; display:block;" />
+                        </div>
+                        <div id="ppVideoHint" style="margin-top:12px; color:#666; font-size:0.95rem;">Sem ficheiro de vídeo definido. Mostrando preview (poster).</div>
+                        <div style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap;">
+                            <a id="ppSiteLink" class="btn primary" href="#" target="_blank" rel="noopener">Abrir site</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(modal);
+
+            function openPreview({ poster, siteUrl, title }) {
+                const img = modal.querySelector('#ppPreviewImg');
+                const site = modal.querySelector('#ppSiteLink');
+                const hint = modal.querySelector('#ppVideoHint');
+
+                if (img) img.src = poster || '';
+                if (site) site.href = siteUrl || '#';
+                if (modal.querySelector('div[role="document"]')) {
+                    // no-op
+                }
+                if (hint) {
+                    hint.textContent = 'Sem ficheiro de vídeo definido. Mostrando preview (poster).';
+                }
+
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closePreview() {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closePreview();
+            });
+            modal.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-close-preview]');
+                if (btn) closePreview();
+            });
+
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const btn = e.target.closest('button[data-video-poster]');
+                    if (!btn) return;
+                    openPreview({
+                        poster: btn.getAttribute('data-video-poster'),
+                        siteUrl: btn.getAttribute('data-site-url'),
+                        title: btn.getAttribute('data-video-title')
+                    });
+                });
+            });
+        })();
+
+        // IntersectionObserver: animações ao scroll
+        (function () {
+            const cards = document.querySelectorAll('.project-card');
+            if (!cards || !cards.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            cards.forEach(c => observer.observe(c));
+        })();
+    </script>
+</body>
+</html>
+

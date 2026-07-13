@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem Somos - PontoPT</title>
+    <style>
+        /* --- Reset & Variáveis --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --branco: #ffffff;
+            --cinza-claro: #f8f9fa;
+            --cinza-texto: #333333;
+            --ponto-vermelho:#333333;
+            --azul-acento: #0066cc;
+            --amarelo-acento: #ffcc00;
+        }
+
+        body {
+            color: var(--cinza-texto);
+            background-color: var(--branco);
+            line-height: 1.6;
+        }
+
+        /* --- Menu de Navegação Fixo --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: padding 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            transition: padding 0.25s ease;
+        }
+
+        .logo-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            display: block;
+            height: 78px;
+            width: auto;
+            object-fit: contain;
+            transition: height 0.25s ease, filter 0.25s ease;
+            filter: drop-shadow(0 6px 16px rgba(0,0,0,0.08));
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+        }
+        header.scrolled .nav-container {
+            padding: 10px 20px;
+        }
+        header.scrolled .logo-img {
+            height: 48px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--cinza-texto);
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--azul-acento);
+        }
+
+        .lang-toggle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 10px;
+            transition: transform 0.15s, background 0.15s;
+        }
+        .lang-toggle:hover {
+            transform: translateY(-1px);
+            background: rgba(0,0,0,0.03);
+        }
+        .lang-flag {
+            width: 34px;
+            height: 22px;
+            display: block;
+            border-radius: 4px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .logo-img { height: 56px; }
+            .lang-flag { width: 32px; height: 20px; }
+        }
+
+        /* --- Cabeçalho da página --- */
+        .page-hero {
+            padding: 190px 20px 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .page-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 45%, #d1d5db 100%);
+            background-size: 200% 200%;
+            animation: heroBgMove 10s ease-in-out infinite;
+            z-index: 0;
+        }
+        .page-hero::after {
+            content: "";
+            position: absolute;
+            inset: -40px;
+            background: radial-gradient(circle at 20% 20%, rgba(255,255,255,0.65), rgba(255,255,255,0) 55%),
+                        radial-gradient(circle at 80% 30%, rgba(0,0,0,0.06), rgba(0,0,0,0) 60%),
+                        radial-gradient(circle at 40% 85%, rgba(255,255,255,0.45), rgba(255,255,255,0) 60%);
+            animation: heroGlow 7s ease-in-out infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .page-hero > * { position: relative; z-index: 1; }
+
+        @keyframes heroBgMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes heroGlow {
+            0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: 0.95; }
+            50% { transform: translate3d(2%, -2%, 0) scale(1.03); opacity: 1; }
+        }
+
+        .page-hero h1 {
+            font-size: 3rem;
+            max-width: 900px;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+        .page-hero h1 span { color: var(--ponto-vermelho); }
+        .page-hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 720px;
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.2rem; }
+        }
+
+        /* --- Secções (Empresa + Bio) --- */
+        .section {
+            padding: 60px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .about-block {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-photo {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-top: 5px solid var(--azul-acento);
+            background: #fff;
+        }
+        .about-photo img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-copy {
+            background: var(--cinza-claro);
+            border-radius: 14px;
+            padding: 28px;
+            border-top: 5px solid var(--amarelo-acento);
+        }
+
+        .about-copy h2 {
+            font-size: 2rem;
+            margin-bottom: 14px;
+        }
+        .about-copy p {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .bio-block {
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 34px;
+        }
+
+        .bio-photo {
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-top: 5px solid var(--azul-acento);
+            background: #fff;
+        }
+        .bio-photo img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .bio-copy {
+            background: var(--cinza-claro);
+            border-radius: 14px;
+            padding: 28px;
+            border-top: 5px solid var(--amarelo-acento);
+        }
+
+        .bio-copy h2 {
+            font-size: 2rem;
+            margin-bottom: 14px;
+        }
+        .bio-copy p {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        @media (max-width: 900px) {
+            .about-block,
+            .bio-block {
+                grid-template-columns: 1fr;
+            }
+            .about-photo img,
+            .bio-photo img {
+                height: 320px;
+            }
+        }
+
+        /* --- Rodapé --- */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <a class="logo-link" href="index.html" aria-label="PontoPT">
+                <img class="logo-img" src="logos.png" alt="PontoPT" />
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html#servicos" data-i18n="nav.services">Serviços</a>
+                <a href="Projetos.html" data-i18n="nav.projects">Projetos</a>
+                <a href="quem-somos.html" data-i18n="nav.about">Quem Somos</a>
+                <a href="index.html#contacto" data-i18n="nav.contact">Contacto</a>
+            </nav>
+
+            <div class="nav-right">
+                <button class="lang-toggle" type="button" id="langToggle" aria-label="Trocar idioma">
+                    <img class="lang-flag" id="langFlag" alt="Bandeira" src="band1.jpg" />
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <h1 data-i18n="aboutHero.title">Quem <span>Somos</span></h1>
+        <p data-i18n="aboutHero.subtitle">PontoPT cria experiências digitais que fazem o teu negócio crescer — com foco em qualidade, performance e resultados.</p>
+    </section>
+
+    <section class="section" aria-label="Sobre a empresa">
+        <div class="container">
+            <div class="about-block">
+                <div class="about-photo">
+                    <!-- Mantém-se um ficheiro existente; substitui depois pela tua foto real da empresa -->
+                    <img src="eu1.jpeg" alt="Equipa e empresa PontoPT" />
+                </div>
+
+                <div class="about-copy">
+                    <h2 data-i18n="aboutCompany.title">A nossa empresa</h2>
+                    <p data-i18n="aboutCompany.p1">Somos uma equipa apaixonada por tecnologia e marketing digital. Acreditamos que uma presença online bem construída é o primeiro passo para gerar confiança e atrair clientes.</p>
+                    <p data-i18n="aboutCompany.p2">Do website às redes sociais, trabalhamos com estratégias claras e execução cuidadosa para que o teu negócio se destaque e evolua continuamente.</p>
+                    <p data-i18n="aboutCompany.p3">Se queres uma marca com identidade, páginas rápidas e conteúdo que faz sentido, estás no sítio certo.</p>
+                </div>
+            </div>
+
+            <div class="bio-block">
+                <div class="bio-copy">
+                    <h2 data-i18n="aboutBio.title">A pessoa por trás do projeto</h2>
+                    <p data-i18n="aboutBio.p1">Olá, o meu nome é Simão, tenho 18 anos e sou da Sertã. tenho paixão por programação e multimédia em geral</p>
+                    <p data-i18n="aboutBio.p2">Sou um programador experiente e tenho muitas horas de experiencia em programação. Eu tenho cuidado em oferecer ao cliente um serviço confiável.</p>
+                    <p data-i18n="aboutBio.p3">Confia em Ponto.pt, O teu pareceiro para o sucesso online.</p>
+                </div>
+
+                <div class="bio-photo">
+                    <!-- Mantém-se um ficheiro existente; substitui depois pela tua foto real -->
+                    <img src="images(2).png" alt="Foto da pessoa que fez o site" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-i18n="footer.copy">&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        (function () {
+            const translations = {
+                'pt-pt': {
+                    lang: 'pt-pt',
+                    flagSrc: 'band1.jpg',
+                    flagAlt: 'Bandeira de Portugal',
+                    i18n: {
+                        'nav.services': 'Serviços',
+                        'nav.projects': 'Projetos',
+                        'nav.about': 'Quem Somos',
+                        'nav.contact': 'Contacto',
+                        'aboutHero.title': 'Quem <span>Somos</span>',
+                        'aboutHero.subtitle': 'PontoPT cria experiências digitais que fazem o teu negócio crescer - com foco em qualidade, performance e resultados.',
+                        'aboutCompany.title': 'A pessoa por trás do projeto',
+                        'aboutCompany.p1': 'Olá, o meu nome é Simão, tenho 18 anos e sou da Sertã. tenho paixão por programação e multimédia em geral.',
+                        'aboutCompany.p2': 'Sou um programador experiente e tenho muitas horas de experiencia em programação. Eu tenho cuidado em oferecer ao cliente um serviço confiável.',
+                        'aboutCompany.p3': 'Confia em Ponto.pt, O teu pareceiro para o sucesso online.',
+                        'aboutBio.title': 'A nossa empresa',
+                        'aboutBio.p1': 'O projeto PontoPT tem como finalidade a criação de uma empresa especializada em Desenvolvimento Web e Marketing Digital.',
+                        'aboutBio.p2': 'O Ponto.PT é direcionado principalmente para pequenas e médias empresas (PME), empreendedores e profissionais independentes. ',
+                        'aboutBio.p3': 'O projeto surge da necessidade crescente de modernização digital de muitas empresas nacionais, que enfrentam dificuldades em adaptar-se às exigências do mercado atual.',
+                        'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. Todos os direitos reservados.'
+                    },
+                    placeholders: {}
+                },
+                'en': {
+                    lang: 'en',
+                    flagSrc: 'band2.jpg',
+                    flagAlt: 'Flag of the United Kingdom',
+                    i18n: {
+                        'nav.services': 'Services',
+                        'nav.projects': 'Projects',
+                        'nav.about': 'About Us',
+                        'nav.contact': 'Contact',
+                        'aboutHero.title': 'Who <span>We Are</span>',
+                        'aboutHero.subtitle': 'PontoPT creates digital experiences that help your business grow — focused on quality, performance and results.',
+                        'aboutCompany.title': 'The person behind the project',
+                        'aboutCompany.p1': 'Hello, my name is Simão, Im 18 years old, and Im from Sertã. I have a passion for programming and multimedia in general.',
+                        'aboutCompany.p2': 'I am an experienced programmer with extensive programming experience. I am committed to providing the client with reliable service.',
+                        'aboutCompany.p3': 'Trust Ponto.pt, Your partner for online success.',
+                        'aboutBio.title': 'Our company',
+                        'aboutBio.p1': 'The PontoPT project aims to create a company specializing in web development and digital marketing.',
+                        'aboutBio.p2': 'Ponto.PT is aimed primarily at small and medium-sized enterprises (SMEs), entrepreneurs, and independent professionals.”',
+                        'aboutBio.p3': 'The project stems from the growing need for digital modernization among many domestic companies, which face difficulties in adapting to the demands of the current market.',
+                        'footer.copy': '&copy; 2026 PontoPT - Website & Marketing. All rights reserved.'
+                    },
+                    placeholders: {}
+                }
+            };
+
+            const html = document.documentElement;
+            const flagImg = document.getElementById('langFlag');
+            const toggleBtn = document.getElementById('langToggle');
+
+            function applyLanguage(lang) {
+                const t = translations[lang] || translations['pt-pt'];
+                html.lang = t.lang;
+
+                if (flagImg) {
+                    flagImg.src = t.flagSrc;
+                    flagImg.alt = t.flagAlt;
+                }
+
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const val = t.i18n[key];
+                    if (val === undefined) return;
+                    if (val.includes('<')) el.innerHTML = val;
+                    else el.textContent = val;
+                });
+            }
+
+            function toggleLanguage() {
+                const current = (document.documentElement.lang || 'pt-pt').toLowerCase();
+                const next = current === 'pt-pt' ? 'en' : 'pt-pt';
+                applyLanguage(next);
+            }
+
+            if (toggleBtn) toggleBtn.addEventListener('click', toggleLanguage);
+            applyLanguage('pt-pt');
+        })();
+
+        // Navbar: efeito compacto ao fazer scroll
+        (function () {
+            const header = document.querySelector('header');
+            if (!header) return;
+
+            function onScroll() {
+                if (window.scrollY > 20) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            }
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+        })();
+
+    </script>
+</body>
+</html>
+
